@@ -14,6 +14,7 @@ function getAssignments(req, res){
     Assignment.aggregatePaginate(aggregateQuery,{
      page: parseInt(req.query.page) || 1,
      limit: parseInt(req.query.limit) || 10,
+     sort : { rendu: req.query.estRendu }
     },
     (err, assignments) => {
      if (err) {
