@@ -5,11 +5,11 @@ let User = require('../model/user')
 
 // commentaire :)
 function registerUser(req, res) {
-    var hashedPassword = bcrypt.hashSync(req.body.password, 8);
+    var hashedPassword = bcrypt.hashSync(req.body.params.password, 8);
 
     User.create({
-            name: req.body.name,
-            email: req.body.email,
+            name: req.body.params.name,
+            email: req.body.params.email,
             password: hashedPassword
         },
         (err, user) => {
@@ -27,7 +27,7 @@ function registerUser(req, res) {
         });
 }
 
-// comentaire :)
+// commentaire :)
 function getMe(req, res) {
     var token = req.headers['x-access-token'];
     if (!token) return res.status(401).send({
@@ -50,15 +50,15 @@ function getMe(req, res) {
     });
 }
 
+// commentaire
 function login(req, res) {
-
     User.findOne({
-        email: req.body.email
+        email: req.body.params.email
     }, function (err, user) {
         if (err) return res.status(500).send('Error on the server.');
         if (!user) return res.status(404).send('No user found.');
 
-        var passwordIsValid = bcrypt.compareSync(req.body.password, user.password);
+        var passwordIsValid = bcrypt.compareSync(req.body.params.password, user.password);
         if (!passwordIsValid) return res.status(401).send({
             auth: false,
             token: null
@@ -78,6 +78,7 @@ function login(req, res) {
 
 }
 
+// commentaire
 function logout(req, res) {
     res.status(200).send({
         auth: false,
