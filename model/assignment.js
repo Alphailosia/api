@@ -6,7 +6,10 @@ let AssignmentSchema = Schema({
     id: Number,
     dateDeRendu: Date,
     nom: String,
-    rendu: Boolean
+    rendu: Boolean,
+    note: Number,
+    remarque: String,
+    matiere: Number
 });
 
 
