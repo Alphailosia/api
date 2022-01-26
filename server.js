@@ -4,6 +4,7 @@ let bodyParser = require('body-parser');
 let assignment = require('./routes/assignments');
 let auth = require('./routes/auth');
 let matiere = require('./routes/matiere');
+let etudiant = require('./routes/etudiant')
 
 let mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
@@ -63,6 +64,8 @@ app.route(prefix + '/login').post(auth.login)
 app.route(prefix + '/logout').get(auth.logout)
 
 app.route(prefix + '/matieres/:id').get(matiere.getMatieres)
+
+app.route(prefix + '/etudiant/:id').get(etudiant.getEtudiant)
 
 // On démarre le serveur
 app.listen(port, "0.0.0.0");

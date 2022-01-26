@@ -9,7 +9,6 @@ function getMatieres(req, res) {
         if(err){
             res.send(err)
         }
-        console.log(matiere)
         res.send(matiere);
     });
 }
