@@ -56,6 +56,7 @@ function postAssignment(req, res) {
     assignment.note = req.body.note;
     assignment.remarque = req.body.remarque;
     assignment.matiere = req.body.matiere;
+    assignment.etudiant = req.body.etudiant;
 
     console.log("POST assignment reçu :");
     console.log(assignment)
