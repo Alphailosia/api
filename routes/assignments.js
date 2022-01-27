@@ -10,7 +10,6 @@ function getAssignments(req, res) {
         res.send(assignments);
     });*/
     let nameMatch = new RegExp(req.query.nomAssignment)
-    console.log(req.query.nomAssignment)
     if (req.query.estRendu === undefined) {
         var aggregateQuery = Assignment.aggregate(
             [{
