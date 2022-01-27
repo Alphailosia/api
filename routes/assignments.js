@@ -9,13 +9,18 @@ function getAssignments(req, res) {
 
         res.send(assignments);
     });*/
-
+    let nameMatch = new RegExp(req.query.nomAssignment)
+    console.log(req.query.nomAssignment)
     if (req.query.estRendu === undefined) {
-        var aggregateQuery = Assignment.aggregate();
+        var aggregateQuery = Assignment.aggregate(
+            [{
+                $match: {nom: {$regex: nameMatch}}
+            }]
+        );
     } else {
         var valeur = (req.query.estRendu === 'true')
         var aggregateQuery = Assignment.aggregate([{
-            $match: {rendu: { $eq: valeur}}
+            $match: {rendu: { $eq: valeur}, nom: {$regex: nameMatch}}
         }]);
     }
     Assignment.aggregatePaginate(aggregateQuery, {
