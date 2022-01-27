@@ -13,6 +13,18 @@ function getEtudiant(req, res) {
     });
 }
 
+function getEtudiants(req, res) {
+
+    Etudiant.find({}, (err, etudiants) => {
+        if (err) {
+            res.send(err)
+        }
+        res.json(etudiants);
+    })
+
+}
+
 module.exports = {
-    getEtudiant
+    getEtudiant,
+    getEtudiants
 };

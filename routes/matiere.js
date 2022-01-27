@@ -1,7 +1,7 @@
 let Matiere = require('../model/matiere')
 
 // commentaire
-function getMatieres(req, res) {
+function getMatiere(req, res) {
     let matiereId = req.params.id;
     Matiere.findOne({
         id: matiereId
@@ -13,6 +13,18 @@ function getMatieres(req, res) {
     });
 }
 
+function getMatieres(req, res) {
+
+    Matiere.find({}, (err, matieres) => {
+        if (err) {
+            res.send(err)
+        }
+        res.json(matieres);
+    })
+
+}
+
 module.exports = {
-    getMatieres
+    getMatieres,
+    getMatiere
 };

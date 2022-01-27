@@ -63,9 +63,11 @@ app.route(prefix + '/login').post(auth.login)
 
 app.route(prefix + '/logout').get(auth.logout)
 
-app.route(prefix + '/matieres/:id').get(matiere.getMatieres)
+app.route(prefix + '/matieres/:id').get(matiere.getMatiere)
+app.route(prefix + '/matieres').get(matiere.getMatieres)
 
-app.route(prefix + '/etudiant/:id').get(etudiant.getEtudiant)
+app.route(prefix + '/etudiants/:id').get(etudiant.getEtudiant)
+app.route(prefix + '/etudiants').get(etudiant.getEtudiants)
 
 // On démarre le serveur
 app.listen(port, "0.0.0.0");
