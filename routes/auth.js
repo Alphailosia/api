@@ -86,9 +86,22 @@ function logout(req, res) {
     });
 }
 
+function checkAdmin(req, res) {
+    if(req.query.password=='admin'){
+        res.status(200).send({
+            admin: true
+        });
+    } else {
+        res.status(200).send({
+            admin: false
+        });
+    }
+}
+
 module.exports = {
     registerUser,
     getMe,
     login,
-    logout
+    logout,
+    checkAdmin
 };

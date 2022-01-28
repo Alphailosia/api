@@ -63,6 +63,8 @@ app.route(prefix + '/login').post(auth.login)
 
 app.route(prefix + '/logout').get(auth.logout)
 
+app.route(prefix+ '/admin').get(auth.checkAdmin)
+
 app.route(prefix + '/matieres/:id').get(matiere.getMatiere)
 app.route(prefix + '/matieres').get(matiere.getMatieres)
 
