@@ -11,55 +11,46 @@ function getAssignments(req, res) {
     });*/
     let nameMatch = new RegExp(req.query.nomAssignment)
     let valeur = (req.query.estRendu === 'true')
-    console.log(typeof req.query.matiere)
     let matiere = parseInt(req.query.matiere)
     let etudiant = parseInt(req.query.etudiant)
     
     var aggregateQuery
     if (req.query.estRendu === undefined && req.query.matiere !== 'undefined' && req.query.etudiant !== 'undefined') {
-        console.log("1")
         aggregateQuery = Assignment.aggregate([{
             $match: {matiere: { $eq: matiere},etudiant: { $eq: etudiant},nom: {$regex: nameMatch}}
         }]);
     } 
     else if(req.query.estRendu === undefined && req.query.matiere === 'undefined' && req.query.etudiant !== 'undefined') {
-        console.log("2")
         aggregateQuery = Assignment.aggregate([{
             $match: {etudiant: { $eq: etudiant},nom: {$regex: nameMatch}}
         }]);
     } 
     else if(req.query.estRendu === undefined && req.query.matiere !== 'undefined' && req.query.etudiant === 'undefined') {
-        console.log("3")
         aggregateQuery = Assignment.aggregate([{
             $match: {matiere: { $eq: matiere},nom: {$regex: nameMatch}}
         }]);
     }
     else if (req.query.estRendu === undefined && req.query.matiere === 'undefined' && req.query.etudiant === 'undefined') {
-        console.log("4")
         aggregateQuery = Assignment.aggregate([{
             $match: {nom: {$regex: nameMatch}}
         }]);
     }
     else if (req.query.estRendu !== undefined && req.query.matiere === 'undefined' && req.query.etudiant !== 'undefined') {
-        console.log("5")
         aggregateQuery = Assignment.aggregate([{
             $match: {rendu: { $eq: valeur},etudiant: { $eq: etudiant},nom: {$regex: nameMatch}}
         }]);
     } 
     else if (req.query.estRendu !== undefined && req.query.matiere !== 'undefined' && req.query.etudiant === 'undefined') {
-        console.log("6")
         aggregateQuery = Assignment.aggregate([{
             $match: {rendu: { $eq: valeur},matiere: { $eq: matiere},nom: {$regex: nameMatch}}
         }]);
     }
     else if (req.query.estRendu !== undefined && req.query.matiere === 'undefined' && req.query.etudiant === 'undefined') {
-        console.log("7")
         aggregateQuery = Assignment.aggregate([{
             $match: {rendu: { $eq: valeur},nom: {$regex: nameMatch}}
         }]);
     }
     else if (req.query.estRendu !== undefined && req.query.matiere !== undefined && req.query.etudiant !== undefined) {
-        console.log("8")
         aggregateQuery = Assignment.aggregate([{
             $match: {rendu: { $eq: valeur},matiere: { $eq: matiere},etudiant: { $eq: etudiant},nom: {$regex: nameMatch}}
         }]);
