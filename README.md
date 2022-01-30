@@ -6,6 +6,7 @@ Sabrina Mercuri
 
 ### Lien heroku :  
 https://angular-intense-app.herokuapp.com/   
+(mettre les routes pour afficher ce que l'on veut -> voir fichier `server.js`)  
 
 ### Lancer la partie serveur en local :  
 - penser à faire `npm i`  
