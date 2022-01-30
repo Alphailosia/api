@@ -57,6 +57,7 @@ function getAssignments(req, res) {
      limit: parseInt(req.query.limit) || 10,
     },
         (err, assignments) => {
+            console.log(assignments)
             if (err) {
                 res.send(err);
             }
