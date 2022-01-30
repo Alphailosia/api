@@ -2,18 +2,15 @@ let Assignment = require('../model/assignment');
 
 // Récupérer tous les assignments (GET)
 function getAssignments(req, res) {
-    /*Assignment.find((err, assignments) => {
-        if(err){
-            res.send(err)
-        }
 
-        res.send(assignments);
-    });*/
+    // expression regulière pour matcher avec le nom de l'assignment
     let nameMatch = new RegExp(req.query.nomAssignment)
+
     let valeur = (req.query.estRendu === 'true')
     let matiere = parseInt(req.query.matiere)
     let etudiant = parseInt(req.query.etudiant)
     
+    // recupération des données en fonction des paramètres de la query (assignment rendu ou non ou les deux, la matière sélectionnée, l'étudiant sélectionné)
     var aggregateQuery
     if (req.query.estRendu === undefined && req.query.matiere !== 'undefined' && req.query.etudiant !== 'undefined') {
         aggregateQuery = Assignment.aggregate([{
@@ -95,9 +92,6 @@ function postAssignment(req, res) {
     assignment.matiere = req.body.matiere;
     assignment.etudiant = req.body.etudiant;
 
-    console.log("POST assignment reçu :");
-    console.log(assignment)
-
     assignment.save((err) => {
         if (err) {
             res.send('cant post assignment ', err);
@@ -110,8 +104,6 @@ function postAssignment(req, res) {
 
 // Update d'un assignment (PUT)
 function updateAssignment(req, res) {
-    console.log("UPDATE recu assignment : ");
-    console.log(req.body);
     Assignment.findByIdAndUpdate(req.body._id, req.body, {
         new: true
     }, (err, assignment) => {
@@ -123,15 +115,12 @@ function updateAssignment(req, res) {
                 message: 'updated'
             })
         }
-
-        // console.log('updated ', assignment)
     });
 
 }
 
 // suppression d'un assignment (DELETE)
 function deleteAssignment(req, res) {
-
     Assignment.findByIdAndRemove(req.params.id, (err, assignment) => {
         if (err) {
             res.send(err);

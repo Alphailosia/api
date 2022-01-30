@@ -1,6 +1,6 @@
 let Etudiant = require('../model/etudiant')
 
-// commentaire
+// recupération d'un étudiant en fonction de son id
 function getEtudiant(req, res) {
     let etudiantId = req.params.id;
     Etudiant.findOne({
@@ -13,15 +13,14 @@ function getEtudiant(req, res) {
     });
 }
 
+// récupération de tous les étudiants de la base de données
 function getEtudiants(req, res) {
-
     Etudiant.find({}, (err, etudiants) => {
         if (err) {
             res.send(err)
         }
         res.json(etudiants);
     })
-
 }
 
 module.exports = {

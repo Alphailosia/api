@@ -3,7 +3,7 @@ let bcrypt = require('bcryptjs')
 let config = require('../config.js')
 let User = require('../model/user')
 
-// commentaire :)
+// enregistrement d'un utilisateur dans la base de données
 function registerUser(req, res) {
     var hashedPassword = bcrypt.hashSync(req.body.params.password, 8);
 
@@ -27,14 +27,13 @@ function registerUser(req, res) {
         });
 }
 
-// commentaire :)
+// recupération du token d'authentification de l'utilisateur
 function getMe(req, res) {
     var token = req.headers['x-access-token'];
     if (!token) return res.status(401).send({
         auth: false,
         message: 'No token provided.'
     });
-
     jwt.verify(token, config.secret, function (err, decoded) {
         if (err) return res.status(500).send({
             auth: false,
@@ -50,7 +49,7 @@ function getMe(req, res) {
     });
 }
 
-// commentaire
+// connexion d'un utilisateur
 function login(req, res) {
     User.findOne({
         email: req.body.params.email
@@ -78,7 +77,7 @@ function login(req, res) {
 
 }
 
-// commentaire
+// deconnexion de l'utilisateur
 function logout(req, res) {
     res.status(200).send({
         auth: false,
@@ -86,6 +85,7 @@ function logout(req, res) {
     });
 }
 
+// vérification du mot de passe d'administrateur
 function checkAdmin(req, res) {
     if(req.query.password=='admin'){
         res.status(200).send({

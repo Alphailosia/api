@@ -1,6 +1,6 @@
 let Matiere = require('../model/matiere')
 
-// commentaire
+// recupération d'une matière en fonction de son id
 function getMatiere(req, res) {
     let matiereId = req.params.id;
     Matiere.findOne({
@@ -13,8 +13,8 @@ function getMatiere(req, res) {
     });
 }
 
+// recupération de toutes les matières
 function getMatieres(req, res) {
-
     Matiere.find({}, (err, matieres) => {
         if (err) {
             res.send(err)
